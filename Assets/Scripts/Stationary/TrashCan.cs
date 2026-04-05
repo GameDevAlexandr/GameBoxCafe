@@ -76,7 +76,9 @@ public class TrashCan : StationaryBase
         if (RoadPosition != _player.RoadPosition)
             return;
 
-        _llvUpButton.gameObject.SetActive(true);
+        if(Level<_upgrades.Length)
+            _llvUpButton.gameObject.SetActive(true);
+        
         if(_player.CurrentItem is Food)
         {
             AddTrash();
@@ -89,6 +91,7 @@ public class TrashCan : StationaryBase
         _trashCanObj = Instantiate(_upgrades[Level].newTrashCan, transform.position, Quaternion.identity);
         _bag = _upgrades[Level].bag;
         Level++;
+        _llvUpButton.gameObject.SetActive(Level < _upgrades.Length);
         int oldPrice = _price;  
         
         if (!_isMaxLvl)
